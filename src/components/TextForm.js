@@ -52,6 +52,7 @@ export default function TextForm(props) {
       let text = document.getElementById('myBox');
       text.select();
       navigator.clipboard.writeText(text.value);
+      document.getSelection().removeAllRanges();
       props.showAlert("text copied on clipboard","success")
     }
 
@@ -76,15 +77,15 @@ export default function TextForm(props) {
           onChange={handleChange}
         ></textarea>
       </div>
-      <button type="submit" className="btn btn-primary ms-3 my-2" onClick={convertUpper}>Uppercase</button>
-      <button type="submit" className="btn btn-primary ms-3 my-2" onClick={convertLower}>Lowercase</button>
-      <button type="submit" className="btn btn-primary ms-3 my-2" onClick={reverse}>Reverse Sentence</button>
-      <button type="submit" className="btn btn-primary ms-3 my-2" onClick={removeExtraspace}>Remove spaces</button>
-      <button type="submit" className="btn btn-primary ms-3 my-2" onClick={copyText}>Copy Text</button>
-      <button type="submit" className="btn btn-primary ms-3 my-2" onClick={clearText}>Clear</button>
+      <button disabled={text.length === 0} type="submit" className="btn btn-primary ms-3 my-2" onClick={convertUpper}>Uppercase</button>
+      <button disabled={text.length === 0} type="submit" className="btn btn-primary ms-3 my-2" onClick={convertLower}>Lowercase</button>
+      <button disabled={text.length === 0} type="submit" className="btn btn-primary ms-3 my-2" onClick={reverse}>Reverse Sentence</button>
+      <button disabled={text.length === 0} type="submit" className="btn btn-primary ms-3 my-2" onClick={removeExtraspace}>Remove spaces</button>
+      <button disabled={text.length === 0} type="submit" className="btn btn-primary ms-3 my-2" onClick={copyText}>Copy Text</button>
+      <button disabled={text.length === 0} type="submit" className="btn btn-primary ms-3 my-2" onClick={clearText}>Clear</button>
       <div className="container my-4">
         <h1>Your Text Summary</h1>
-        <p>{text.length > 0 ? text.split(' ').length : 0} words and {text.length} characters in your text</p>
+        <p>{text.split(/[\s+]/).filter((ele)=> ele.length !== 0).length} words and {text.length} characters in your text</p>
         <h3>Preview Your text</h3>
         <p>{text.length >0 ? text :"Enter some text in text box"}</p>
       </div>
