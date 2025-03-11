@@ -89,7 +89,3 @@ export default function TextForm(props) {
     </div>
   );
 }
-
-TextForm.propTypes = {
-    heading : PropTypes.string.isRequired
-};
